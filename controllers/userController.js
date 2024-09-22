@@ -41,7 +41,7 @@ exports.loginUser = (req, res) => {
       }
 
       // Gera o token JWT
-      const token = jwt.sign({ id: user.id, role: user.role }, 'secreta-chave', { expiresIn: '1h' });
+      const token = jwt.sign({ id: user.id, role: user.role }, 'chave-secreta', { expiresIn: '1h' });
       res.status(200).json({ token });
     });
   });

@@ -7,7 +7,10 @@ const authMiddleware = (req, res, next) => {
     return res.status(403).json({ error: 'Nenhum token fornecido!' });
   }
 
-  jwt.verify(token, 'secreta-chave', (err, decoded) => {
+  // Separar 'Bearer' do token, caso o cabeçalho tenha o formato 'Bearer token'
+  const bearerToken = token.split(' ')[1];
+
+  jwt.verify(bearerToken, 'chave-secreta', (err, decoded) => {
     if (err) {
       return res.status(401).json({ error: 'Token inválido!' });
     }
